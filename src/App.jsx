@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 // Product component
 function Product({ item, addToCart }) {
+
   return (
     <div>
       <h3>{item.name}</h3>
@@ -115,7 +116,9 @@ function App() {
   useEffect(() => {
     console.log("Cart updated");
     // Error 6: Incorrect dependency array
-  }, [cart, undefinedVariable]);
+  }, [cart
+    // , undefinedVariable
+  ]);
 
   return (
     <div className="container">
@@ -126,7 +129,7 @@ function App() {
       <div className="product-list">
         {products.map((product) => (
           <div className="product-card" key={product.id}>
-            <Product item={product.name} addToCart={addToCart} />
+            <Product item={product} addToCart={addToCart} />
           </div>
         ))}
       </div>
@@ -138,6 +141,6 @@ function App() {
   console.log(undefinedVariable);
 }
 
-const [state, setState] = useState();
+// const [state, setState] = useState();
 
 export default App;
