@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 
 // Product component
 function Product({ item, addToCart }) {
+  const price = typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price).toFixed(2);
+
 
   return (
     <div>
       <h3>{item.name}</h3>
-      <p>Price: ${item.price.toFixed(2)}</p>
+      <p>Price: ${price}</p>
       <button onClick={() => addToCart(item)}>Add to Cart</button>
     </div>
   );
@@ -57,11 +59,16 @@ function NewProductForm({ addProduct }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!newProduct.name || newProduct.price <= 0 || isNaN(newProduct.price)) {
+    const price = parseFloat(newProduct.price);
+    if (!newProduct.name || isNaN(price) || price <= 0) {
       alert("Please enter a valid name and price.");
       return;
     }
-    addProduct(newProduct);
+    addProduct({
+      ...newProduct,
+      price: price,
+      id: Date.now() // Generate a unique ID
+    });
     setNewProduct({ name: "", price: "" });
   };
 
