@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 
 // Product component
 function Product({ item, addToCart }) {
-  const price = typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price).toFixed(2);
-
+  const price =
+    typeof item.price === "number"
+      ? item.price.toFixed(2)
+      : parseFloat(item.price).toFixed(2);
 
   return (
     <div>
@@ -67,7 +69,7 @@ function NewProductForm({ addProduct }) {
     addProduct({
       ...newProduct,
       price: price,
-      id: Date.now() // Generate a unique ID
+      id: Date.now(), // Generate a unique ID
     });
     setNewProduct({ name: "", price: "" });
   };
@@ -122,10 +124,7 @@ function App() {
 
   useEffect(() => {
     console.log("Cart updated");
-    // Error 6: Incorrect dependency array
-  }, [cart
-    // , undefinedVariable
-  ]);
+  }, [cart]);
 
   return (
     <div className="container">
@@ -144,10 +143,6 @@ function App() {
       <ShoppingCart cartItems={cart} />
     </div>
   );
-
-  console.log(undefinedVariable);
 }
-
-// const [state, setState] = useState();
 
 export default App;
